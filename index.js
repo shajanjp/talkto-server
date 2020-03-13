@@ -3,8 +3,8 @@ const app = express();
 
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
-let PORT = 3000;
-let HOSTNAME = 'localhost'
+let PORT = process.env.PORT || 3000;
+let HOSTNAME = process.env.HOSTNAME || `http://localhost:${PORT}`;
 
 app.get('/', (req, res) => {
   res.json({"success": true})
@@ -22,5 +22,5 @@ io.on('connection', (client) => {
 })
 
 http.listen(PORT, () => {
-  console.log(`Server started at: ${ HOSTNAME }:${PORT}`);
+  console.log(`Server started at: ${ HOSTNAME }`);
 });
